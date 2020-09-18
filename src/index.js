@@ -5,15 +5,22 @@
  * @param {*} [optionValue] - optional return value in case the index cannot be resolved
  * @returns {any}
  */
-export default function getProp(value, prop, optionValue) {
+export default function getProp(value, prop, optionValue, safe = true) {
     value = value || {};
     let parts = Array.isArray(prop) ? prop : prop.match(/([^\[\](\.|\/)]+)/g);
-    for (let i = 0; i < parts.length; i++) {
-        if (typeof value === "object" && parts[i] in value) {
-            value = value[parts[i]];
-        } else {
-            return optionValue;
+    try {
+        for (let i = 0; i < parts.length; i++) {
+            const withNext = safe
+                ? typeof value == "object" && value != null
+                : true;
+            if (withNext && parts[i] in value) {
+                value = value[parts[i]];
+            } else {
+                return optionValue;
+            }
         }
+    } catch (e) {
+        value = optionValue;
     }
     return value;
 }

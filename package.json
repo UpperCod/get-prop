@@ -1,6 +1,6 @@
 {
     "name": "@uppercod/get-prop",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Obtains the value of an object or array, according to a string or array type map.",
     "main": "cjs.js",
     "module": "esm.js",

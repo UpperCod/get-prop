@@ -38,3 +38,11 @@ test("get fill", (t) => {
     const fill = "...";
     t.is(getProp(data2, "[0][0][1]", fill), fill);
 });
+
+test("get date", (t) => {
+    const data = {
+        date: new Date(),
+    };
+    t.is(getProp(data, "date"), data.date);
+    t.is(getProp(data, "dates"), undefined);
+});
